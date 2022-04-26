@@ -1,6 +1,15 @@
+.wrapper {
+  min-height: 100vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .article {
   background: white;
   min-width: 600px;
+
   border-radius: 20px;
   padding: 20px 55px;
 
@@ -10,6 +19,7 @@
     text-align: center;
   }
 
-  &Section {
+  &Text {
+    text-align: center;
   }
 }

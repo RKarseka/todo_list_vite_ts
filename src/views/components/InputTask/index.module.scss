@@ -1,0 +1,66 @@
+.task {
+  background: #dbe2ef;
+  padding: 9px;
+  border-radius: 5px;
+  display: grid;
+  grid-template-columns: 1fr repeat(2, 35px);
+  grid-gap: 5px;
+}
+
+.label {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  grid-gap: 5px;
+  cursor: pointer;
+}
+
+.checkbox {
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+}
+
+.btn {
+  display: block;
+  border: none;
+  background: none no-repeat center;
+  cursor: pointer;
+  padding: 0;
+  transition: opacity 0.3s;
+
+  &:hover {
+    opacity: 0.7;
+  }
+
+  &Edit {
+    background-image: url('./images/edit.svg');
+  }
+
+  &Remove {
+    background-image: url('./images/trash.svg');
+  }
+
+  &Save {
+    background-image: url('./images/check.svg');
+  }
+}
+
+.input {
+  font: 1rem/1em 'Roboto', sans-serif;
+  border: none;
+  padding: 3px;
+  background: none;
+  box-shadow: 0 4px 0 -3px #3f72af;
+
+  &:focus-visible {
+    outline: none;
+  }
+}
+
+.title {
+  line-height: 1.2;
+  &Completed {
+    text-decoration: line-through rgba(#000000, 0.6);
+  }
+}

@@ -1,11 +1,10 @@
 import styles from './index.module.scss';
 
-import axios from 'axios';
-import { Task, useToDoStore } from '../../data/stores/useToDoStore';
 import { useEffect } from 'react';
-import { InputPlus } from '../components/InputPlus';
 
-const PATH = 'https://jsonplaceholder.typicode.com/todos';
+import { useToDoStore } from '../../data/stores/useToDoStore';
+import { Main } from '../components/main';
+import { axiosGet } from '../../data/helpers';
 
 export const App: React.FC = () => {
   const [tasks, createTask, updateTask, removeTask, loadTasks] = useToDoStore(
@@ -21,27 +20,29 @@ export const App: React.FC = () => {
   useEffect(() => {
     (async () => {
       try {
-        await axios.get(`${PATH}?_limit=6`).then(({ data }) => loadTasks(data));
+        loadTasks(await axiosGet());
       } catch (error) {
         console.log(error);
       }
     })();
   }, []);
-
-  console.log(tasks);
+  console.log('render');
 
   return (
-    <article className={styles.article}>
-      <h1 className={styles.articleTitle}>To Do App</h1>
-      <section className={styles.articleSection}>
-        <InputPlus
-          onAdd={(title) => {
-            title && createTask(title);
-          }}
+    <div
+      className={styles.wrapper}
+      // onClick={onClickOutOfForm}
+    >
+      <article className={styles.article}>
+        <h1 className={styles.articleTitle}>To Do App</h1>
+
+        <Main
+          tasks={tasks}
+          createTask={createTask}
+          updateTask={updateTask}
+          removeTask={removeTask}
         />
-      </section>
-      <section className={styles.articleSection}></section>
-      index
-    </article>
+      </article>
+    </div>
   );
 };

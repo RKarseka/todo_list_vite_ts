@@ -1,3 +1,31 @@
 .InputPlus {
-  display: block;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 48px;
+  margin-bottom: 15px;
+
+  &Value {
+    border: 1px solid #b1b1b1;
+    border-radius: 5px 0 0 5px;
+    padding: 9px;
+    font: 1rem/1.4 'Roboto', sans-serif;
+    background-color: #dbe2ef;
+
+    &::placeholder {
+      color: #7b7b7b;
+    }
+  }
+
+  &Btn {
+    border-radius: 0 5px 5px 0;
+    border: none;
+    cursor: pointer;
+    background: #3f72af url('./images/plus.svg') no-repeat center;
+
+    transition: opacity 0.3s;
+
+    &:hover {
+      opacity: 0.7;
+    }
+  }
 }

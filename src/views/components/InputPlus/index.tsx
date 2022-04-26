@@ -23,14 +23,13 @@ export const InputPlus: React.FC<InputPlusProps> = ({ onAdd }) => {
     <div className={styles.InputPlus}>
       <input
         type="text"
-        className={styles.InputPlusInput}
+        className={styles.InputPlusValue}
         value={inputValue}
         onChange={handleInputChange}
         onKeyDown={(evt) => {
-          if (evt.key === 'Enter') {
-            addTask();
-          }
+          evt.key === 'Enter' && addTask();
         }}
+        placeholder={'add new task...'}
       />
       <button
         onClick={addTask}

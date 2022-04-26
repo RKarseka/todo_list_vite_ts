@@ -1,40 +1,38 @@
 import create from 'zustand';
+import { ITask, IToDoStore } from '../interfaces';
 
-export interface Task {
-  id: number;
-  createdAt?: number;
-  completed?: boolean;
-  title?: string;
-  userId?: number;
-}
-
-export interface ToDoStore {
-  tasks: Task[];
-  createTask: (title: string) => void;
-  updateTask: (id: number, title: string) => void;
-  removeTask: (id: number) => void;
-  loadTasks: (loadedTasks: Task[]) => void;
-}
-
-export const useToDoStore = create<ToDoStore>((set, get) => ({
+export const useToDoStore = create<IToDoStore>((set, get) => ({
   tasks: [],
+
   createTask: (title: string) => {
     const { tasks } = get();
-    const maxId = tasks.reduce(
+    const maxId: number = tasks.reduce(
       (prev, item) => (prev > item.id ? prev : item.id) + 1,
       0
     );
-    const newTask = { id: maxId, title, createdAt: Date.now() };
+    const newTask: ITask = {
+      id: maxId,
+      title,
+      createdAt: Date.now(),
+      completed: false,
+    };
 
     set({ tasks: [newTask, ...tasks] });
   },
 
-  updateTask: (id: number, title: string) => {
+  updateTask: (id, title, completed) => {
     const { tasks } = get();
+
     set({
       tasks: tasks.map((task) => ({
         ...task,
-        title: task.id === id ? title : task.title,
+        ...(id === undefined && {
+          isEditing: false,
+        }),
+        ...(id === task.id && {
+          title: title ? title : task.title,
+          completed: completed !== undefined ? completed : task.completed,
+        }),
       })),
     });
   },
@@ -44,7 +42,7 @@ export const useToDoStore = create<ToDoStore>((set, get) => ({
       tasks: [...tasks.filter((task) => task.id !== id)],
     });
   },
-  loadTasks: (loadedTasks: Task[]) => {
+  loadTasks: (loadedTasks: ITask[]) => {
     set({ tasks: [...loadedTasks] });
   },
 }));
