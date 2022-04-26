@@ -36,7 +36,7 @@ export const InputTask: React.FC<IInputTask> = ({
     return () => {
       document.removeEventListener('mousedown', checkIfClickedOutside);
     };
-  }, [value]);
+  }, [isEditing, value]);
 
   return (
     <div className={styles.task} ref={ref}>

@@ -17,10 +17,19 @@ export const App: React.FC = () => {
     ]
   );
 
+  const getCurrentState = () => {
+    try {
+      const currentState = JSON.parse(
+        window.localStorage.getItem('tasks') || ''
+      );
+      return currentState;
+    } catch (error) {}
+  };
+
   useEffect(() => {
     (async () => {
       try {
-        loadTasks(await axiosGet());
+        loadTasks(await (getCurrentState() || axiosGet()));
       } catch (error) {
         console.log(error);
       }

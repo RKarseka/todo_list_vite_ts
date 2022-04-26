@@ -4,6 +4,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
+
+  @media screen and (max-width: 750px) {
+    min-height: unset;
+    padding: 15px;
+  }
 }
 
 .article {
@@ -12,6 +17,12 @@
 
   border-radius: 20px;
   padding: 20px 55px;
+
+  @media screen and (max-width: 750px) {
+    min-width: unset;
+    max-width: 95vw;
+    padding: 20px;
+  }
 
   &Title {
     font-size: 40px;
