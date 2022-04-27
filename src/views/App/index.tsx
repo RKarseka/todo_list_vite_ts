@@ -35,7 +35,6 @@ export const App: React.FC = () => {
       }
     })();
   }, []);
-  console.log('render');
 
   return (
     <div
